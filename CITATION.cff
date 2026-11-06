@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+message: "Please cite the research preprint and identify the exact model/patch revision used."
+title: "LLM-Directed Model Stitching and Weight Editing"
+authors:
+  - family-names: Martin
+    given-names: Trevor
+    affiliation: DataStreams Solutions
+  - name: GPT-6 Astra (AI coauthor)
+version: 0.1.0
+date-released: 2026-11-06
+url: "https://datastreamssolutions.com/research/go-suture/"
+repository-code: "https://github.com/tcmartin/qwen-go-suture"
+license: Apache-2.0

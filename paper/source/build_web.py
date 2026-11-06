@@ -1,0 +1,48 @@
+"""Generate public HTML fragments from canonical research content; no network or GPU."""
+from pathlib import Path
+from html import escape as e
+import manuscript as m
+ROOT=Path(__file__).resolve().parents[1]
+github='https://github.com/tcmartin/qwen-go-suture'
+hf='https://huggingface.co/trevdatastreams/qwen3.5-4b-go-suture'
+links=f'<nav aria-label="Research artifacts"><a href="{github}">Public code on GitHub</a> · <a href="{hf}">Model artifacts on Hugging Face</a></nav>'
+meta='<p class="byline">Trevor Martin — DataStreams Solutions<br>Coauthor: GPT-6 Astra (AI model)</p><p>6 November 2026 · Research preprint · Not peer reviewed</p>'
+out=['<article class="research-article">',f'<header><h1>{e(m.TITLE)}</h1><p class="subtitle">{e(m.SUBTITLE)}</p>{meta}{links}</header>']
+for b in m.blocks:
+ if b[0]=='h':out.append(f'<h2>{e(b[1])}</h2>')
+ elif b[0]=='p':out.append(f'<p>{e(b[1])}</p>')
+ elif b[0]=='eq':out.append(f'<p class="equation"><code>{e(b[1])}</code></p>')
+ elif b[0]=='table':
+  out.extend(['<div class="table-scroll"><table>',f'<caption>{e(b[1])}</caption>','<thead><tr>'+''.join(f'<th scope="col">{e(x)}</th>' for x in b[2])+'</tr></thead><tbody>'])
+  out.extend('<tr>'+''.join(f'<td>{e(str(x))}</td>' for x in row)+'</tr>' for row in b[3]);out.append('</tbody></table></div>')
+out.append('<h2>References</h2><ol>')
+for r,u in m.refs:out.append(f'<li>{e(r)} <a href="{e(u)}">Source</a></li>')
+out.extend(['</ol>',links,'</article>'])
+(ROOT/'research-article.html').write_text('\n'.join(out)+'\n')
+blog=f'''<article class="blog-article">
+<header><h1>Can an AI stitch a Go expert into a language model?</h1><p class="subtitle">A working hidden-state connection, direct neural edits, and what the experiments actually show.</p>{meta}{links}</header>
+<p>We asked GPT-6 Astra to help build a specific kind of connection: an existing specialist’s representations feeding a general model’s own language and actions. The resulting prototype connects Qwen3.5-4B to a frozen Go specialist through two learned interfaces. Astra implemented the connection, investigated failures, and directly rewrote selected connector weights. The project produced measurable improvements in reconstruction, attention and probability loss, along with clear examples of those improvements failing to produce better answers.</p>
+<h2>The route runs through Qwen</h2>
+<p>The model receives an ordinary text diagram of a board. Qwen’s early hidden states feed a learned sender, which predicts the Go expert’s input planes. The frozen expert computes spatial representations; a learned receiver writes them into later Qwen hidden states. Qwen’s own vocabulary head produces the answer. The runtime does not give the expert a parser-derived ground-truth board or copy its final policy move into the response.</p>
+<p><strong>Text → Qwen hidden states → learned sender → frozen Go expert → learned receiver → later Qwen hidden states → Qwen output.</strong></p>
+<p>This is a small native-language prototype. We have not established strong full-game play, board-image input, general strategic explanations or a qualified packed decision-output path. The specialist remains present at inference.</p>
+<h2>What improved</h2>
+<ul><li>The first learned connection raised factual generation from <strong>28/64 to 38/64</strong> on the fixed small panel.</li><li>Sender occupancy reconstruction improved from <strong>48.81% to 78.20%</strong> across interface experiments.</li><li>Queried-square receiver attention improved from <strong>6/256 to 90/256</strong> after address training.</li><li>A direct edit to <strong>1,152 receiver weights</strong> reduced mean answer-token negative log likelihood by <strong>6.91%</strong>; a less aggressive mean-removal edit improved it by <strong>2.57%</strong>.</li></ul>
+<p>Those last edits were literal weight changes authored and implemented by the AI agent, with no gradient steps in the edit trials. Astra decomposed the learned positional value weights into a constant contribution and location-varying contrasts, then tested removal, reverse and norm-matched random controls. It evaluated the resulting composite model on the GPU and checked exact restoration of the original tensors.</p>
+<h2>Why the counterexamples matter</h2>
+<p>The 6.91% loss improvement came with generated correctness falling from 54/96 to 52/96; the 2.57% edit scored 53/96. We retain both patches as useful tradeoff variants. The improvement in one metric is real; describing either as a generally better model would hide the output regressions.</p>
+<p>Wrong-board expert memory also preserved much of the initial factual gain: 36/64 versus 38/64 with correct memory. That means some apparent progress may come from learned answer priors or generic features rather than the correct board’s specialist computation. The controls identify what the experiment has yet to establish.</p>
+<h2>The latest experiments</h2>
+<p>A paired-board receiver fit completed 180 updates in about 85 seconds. Occupancy answers improved from 8/16 to 9/16 and the model gained one match to the expert’s preferred move. But capture answers fell from 11/16 to 7/16, legal moves from 10/16 to 3/16, and total correct generation from 54/96 to 52/96. We preserve the checkpoint and its partial gains while keeping stage 017 as the reference.</p>
+<p>Two CPU follow-ups tested player-perspective encoding and a direct affine sender correction. Neither established a replacement: the latter improved binary cross-entropy while decreasing correct board cells from 4,317 to 4,102 out of 5,265 on its reused check. These negative results narrow the next experiment rather than disappearing from the story.</p>
+<h2>What this says about LLM-led research</h2>
+<p>The interesting result is a concrete example of an LLM agent figuring out how to implement and revise neural connections, including direct tensor edits, under human direction. Trevor specified the goal and corrected the architecture; GPT-6 Astra wrote interfaces, tests, controls, edits and analysis. Model stitching itself is established prior art. This case is not a claim that Astra can read any skill from raw weights or transplant arbitrary expertise without training.</p>
+<p>The study uses 128 training boards, 32 development boards and 64 repeatedly inspected confirmation boards. Native factual generation covers only 16 boards. These are exploratory, adaptively reused panels, not a fresh benchmark or proof of broad Go strength. The next useful test is a frozen architecture on new game-disjoint boards with stronger expert-use controls.</p>
+<h2>Explore and reproduce</h2>
+<p>The public research package includes the reference suture, documented experimental variants and code. Native generation uses the Qwen base, its recorded native layer-16 patch, the frozen Go expert and the suture; the historical decision SFT state is not the source of the native route’s behavior. Use the repository’s exact dependency and checkpoint instructions. The public stage-017 package includes the native layer-16 patch and donor, plus deterministic scripts for the 022/023 direct edits.</p>
+<p><strong>Reproduction status:</strong> the extracted portable native loader passed exact CPU component and state checks. Full-model GPU replay of that loader has not yet been performed. The reported GPU experiments used the original research runtime; packaging checks are not a new capability evaluation.</p>
+{links}
+<p><em>GPT-6 Astra is credited as an AI coauthor for its substantive implementation and experimental work. Trevor Martin is the human author and contact. This article accompanies a research preprint that has not been peer reviewed.</em></p>
+</article>'''
+(ROOT/'blog-article.html').write_text(blog+'\n')
+print(ROOT)

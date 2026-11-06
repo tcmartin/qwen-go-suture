@@ -1,0 +1,10 @@
+{
+  "position_erase022": {
+    "source_patch_sha256": "a9363d99f2496ae9c4450ae7db279a601df087842adb6e2f45410e86868f47b2",
+    "changed_values": 1152
+  },
+  "remove_mean023": {
+    "source_patch_sha256": "32a9e617d4342b1fd5a5a3232a30079dc70afa13a98f8ba23f55612e7ef0311b",
+    "changed_values": 1152
+  }
+}

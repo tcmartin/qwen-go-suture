@@ -1,0 +1,17 @@
+Size: 9
+Black to move.
+Komi: 6.5
+  A B C D E F G H J
+9 . . . . . . . . .
+8 . . X X X . O O X
+7 . O . O O O O X .
+6 . . . O X O X X .
+5 . . O X . X X . X
+4 . O O X X O . X .
+3 . O X X . . O O .
+2 . X . . . . . . .
+1 . . . . . . . . .
+Ko: none
+Recent moves: E6, E7
+Question: What occupies E3?
+Answer with one exact sentence: It is empty. / It is black. / It is white.

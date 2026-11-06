@@ -1,0 +1,6 @@
+{
+  "id": "go-bridge003/ebb4749397dbb8e8daa741a7036dd417/occupancy",
+  "split": "train",
+  "expected_answer": "It is empty.",
+  "note": "Training example; output is generated, not hard-coded."
+}

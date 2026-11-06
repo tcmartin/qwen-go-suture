@@ -1,0 +1,25 @@
+{
+  "format": "qwen-go-native-suture-v1",
+  "reference": "017",
+  "base_model": "Qwen/Qwen3.5-4B",
+  "base_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "base_dtype": "bfloat16",
+  "attention_implementation": "sdpa",
+  "hidden_size": 2560,
+  "width": 64,
+  "reader_layer": 8,
+  "writer_layer": 28,
+  "base_patch_layer": 16,
+  "patched_native_matrix_sha256": "0964c602dbbacff506cb52761d3c771b7118560160243f8a7d0096cb7fc6cfd0",
+  "base_patch_sha256": "8fe077bb3c4be055328bc49a32ea7aa285d6bec4e742dc385bee20d40f4309e5",
+  "source_bridge_checkpoint_sha256": "5e897684c3b0c478f22c0bfcfcedb6854a1f1de7b3d64cf96b7ca43882e00b0f",
+  "donor_repository": "millionco/moka",
+  "donor_revision": "3b249ec094c3f0fe0eb9b96144e25d65149954a9",
+  "native_adapter_disabled": true,
+  "typed_decision_route_included": false,
+  "full_model_release_gpu_replay_verified": false,
+  "upstream_base_shard_sha256": [
+    "26a93f066e1916adb13453dae5a0c707c0fbc71299ed98779571a907b8e74c61",
+    "cb544bd9bfae93dc59b0f22b292f5933573854a7f9b97835c67060d7d910e188"
+  ]
+}

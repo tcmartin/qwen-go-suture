@@ -1,0 +1,56 @@
+[
+  {
+    "file": "go_transplant.py",
+    "sha256": "a2c517365106671f8b5148784ca392841523d12a0e1e5674888ad88de1d1eb3b",
+    "definitions": [
+      "MokaGraft"
+    ]
+  },
+  {
+    "file": "go_native_bridge.py",
+    "sha256": "e4a81924079a4305bd56add5beec9521ddb0864a507b25039fa7e1d69b87e635",
+    "definitions": [
+      "donor_hidden",
+      "GoBridge"
+    ]
+  },
+  {
+    "file": "go_hidden_roundtrip.py",
+    "sha256": "8698738497c7a39a9e48ae7e921993cb8521b6e3e0ca1722e093cf86e2cf27f2",
+    "definitions": [
+      "HiddenToGo",
+      "HiddenGoRoundTrip"
+    ]
+  },
+  {
+    "file": "go_attention_alignment.py",
+    "sha256": "cd30644537dd33698e90d809301daff97a93b1d08114e6848fca64e80acfb34c",
+    "definitions": [
+      "AlignedHiddenToGo",
+      "AlignedRoundTrip"
+    ]
+  },
+  {
+    "file": "go_receiver_adaptation.py",
+    "sha256": "5ada989068ffc54e32b337c8930bacbb7ba2830cfca7dc185eeaeb18d2784709",
+    "definitions": [
+      "ReceiverRoundTrip"
+    ]
+  },
+  {
+    "file": "go_receiver_alignment.py",
+    "sha256": "e2d6246f2b7abd30eb66f35fc894ca3227cbb9851ec2f0f95ec253ab06ecf96e",
+    "definitions": [
+      "AddressedWriter",
+      "AddressedRoundTrip"
+    ]
+  },
+  {
+    "file": "go_spatial_readout.py",
+    "sha256": "6f5cc928fa27caf1e7b1b3e962fc1a482f216411f1e218a3318c12d8db225a55",
+    "definitions": [
+      "SpatialWriter",
+      "SpatialRoundTrip"
+    ]
+  }
+]

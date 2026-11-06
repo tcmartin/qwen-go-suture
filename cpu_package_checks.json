@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "gpu_used": false,
+  "full_model_gpu_replay": false,
+  "checks": [
+    "all170 bridge tensors match original checkpoint exactly",
+    "original and public classes strict-load all weights",
+    "normal CPU prefill sender/expert/gate/receiver and cached-token exact replay",
+    "shuffled CPU prefill sender/expert/gate/receiver and cached-token exact replay",
+    "zero CPU prefill sender/expert/gate/receiver and cached-token exact replay",
+    "disabled branch is exact identity"
+  ],
+  "tensors": 170,
+  "bridge_bytes": 3867916,
+  "limitations": [
+    "CPU components and serialization only; not public-loader GPU generation qualification.",
+    "The native loader omits disabled LoRA wrappers; source algorithms/weights are preserved but full-model output parity has not been measured."
+  ]
+}

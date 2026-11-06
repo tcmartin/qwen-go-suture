@@ -1,0 +1,44 @@
+{
+  "panel": "Reused confirmation, not fresh independent evidence",
+  "reference": "017",
+  "counts": {
+    "generated_total": 96,
+    "factual_generated": 64,
+    "legal_moves": 16,
+    "teacher_forced": 384
+  },
+  "reference017": {
+    "generated_correct": 54,
+    "factual_correct": 38,
+    "legal_moves": 10,
+    "mean_answer_token_nll": 0.4199059046
+  },
+  "position_erase022": {
+    "generated_correct": 52,
+    "factual_correct": 36,
+    "legal_moves": 10,
+    "mean_answer_token_nll": 0.3908977,
+    "nll_relative_reduction_percent": 6.91,
+    "changed_weights": 1152,
+    "gradient_updates": 0
+  },
+  "remove_mean023": {
+    "generated_correct": 53,
+    "factual_correct": 37,
+    "legal_moves": 10,
+    "mean_answer_token_nll": 0.4090953242,
+    "nll_relative_reduction_percent": 2.5745,
+    "changed_weights": 1152,
+    "gradient_updates": 0
+  },
+  "paired_training027_not_default": {
+    "generated_correct": 52,
+    "factual_correct": 35,
+    "occupancy_correct": 9,
+    "capture_correct": 7,
+    "legal_moves": 3,
+    "updates": 180,
+    "exposures": 720
+  },
+  "conclusion": "Direct edits improve average probability loss while reducing exact generated correctness. Partial gains and adverse results are retained; neither variant replaces reference017."
+}
